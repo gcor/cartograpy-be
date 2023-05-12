@@ -22,7 +22,7 @@ export default [
     "source-layer": "building",
     layout: {
       visibility: "visible",
-      "text-font": ["Noto Sans Regular"],
+      "text-font": ["Iset Sans Regular"],
       "text-field": ["get", "name"],
       "text-size": [
         "interpolate",
@@ -51,7 +51,7 @@ export default [
     "source-layer": "landuse",
     layout: {
       visibility: "visible",
-      "text-font": ["Noto Sans Italic"],
+      "text-font": ["Iset Sans Italic"],
       "text-field": ["get", "name"],
       "text-size": [
         "interpolate",
@@ -84,7 +84,7 @@ export default [
     "source-layer": "building",
     layout: {
       visibility: "visible",
-      "text-font": ["Noto Sans Regular"],
+      "text-font": ["Iset Sans Regular"],
       "text-field": ["get", "name"],
       "text-size": [
         "interpolate",
@@ -123,7 +123,7 @@ export default [
     "source-layer": "building",
     layout: {
       visibility: "visible",
-      "text-font": ["Noto Sans Regular"],
+      "text-font": ["Iset Sans Regular"],
       "text-field": ["get", "name"],
       "text-size": [
         "interpolate",
@@ -160,7 +160,7 @@ export default [
       "icon-size": 1,
       "icon-anchor": "bottom",
       "icon-allow-overlap": true,
-      "text-font": ["Noto Sans Regular"],
+      "text-font": ["Iset Sans Regular"],
       "text-field": ["get", "name"],
       "text-size": 11,
       "text-max-width": 4,
@@ -184,7 +184,7 @@ export default [
     "source-layer": "leisure",
     layout: {
       visibility: "visible",
-      "text-font": ["Noto Sans Italic"],
+      "text-font": ["Iset Sans Italic"],
       "text-field": ["get", "name"],
       "text-size": [
         "interpolate",
@@ -219,7 +219,7 @@ export default [
       "icon-size": 1,
       "icon-anchor": "bottom",
       "icon-allow-overlap": true,
-      "text-font": ["Noto Sans Regular"],
+      "text-font": ["Iset Sans Regular"],
       "text-field": ["get", "name"],
       "text-size": 11,
       "text-max-width": 4,
@@ -251,7 +251,7 @@ export default [
       "icon-size": 1,
       "icon-anchor": "bottom",
       "icon-allow-overlap": true,
-      "text-font": ["Noto Sans Regular"],
+      "text-font": ["Iset Sans Regular"],
       "text-field": ["get", "name"],
       "text-size": 11,
       "text-max-width": 4,
@@ -279,7 +279,7 @@ export default [
     "source-layer": "leisure",
     layout: {
       visibility: "visible",
-      "text-font": ["Noto Sans Regular"],
+      "text-font": ["Iset Sans Regular"],
       "text-field": ["get", "name"],
       "text-size": [
         "interpolate",
@@ -306,7 +306,7 @@ export default [
     "source-layer": "amenity",
     layout: {
       visibility: "visible",
-      "text-font": ["Noto Sans Italic"],
+      "text-font": ["Iset Sans Italic"],
       "text-field": ["get", "name"],
       "text-size": [
         "interpolate",
@@ -337,7 +337,7 @@ export default [
     "source-layer": "amenity",
     layout: {
       visibility: "visible",
-      "text-font": ["Noto Sans Italic"],
+      "text-font": ["Iset Sans Italic"],
       "text-field": ["get", "name"],
       "text-size": [
         "interpolate",
@@ -372,7 +372,7 @@ export default [
       "icon-size": 1,
       "icon-anchor": "bottom",
       "icon-allow-overlap": true,
-      "text-font": ["Noto Sans Regular"],
+      "text-font": ["Iset Sans Regular"],
       "text-field": ["get", "name"],
       "text-size": 11,
       "text-max-width": 4,
@@ -403,7 +403,7 @@ export default [
       "icon-image": ["get", "amenity"],
       "icon-size": 1,
       "icon-anchor": "bottom",
-      "text-font": ["Noto Sans Regular"],
+      "text-font": ["Iset Sans Regular"],
       "text-field": ["get", "name"],
       "text-size": [
         "interpolate",
@@ -439,7 +439,7 @@ export default [
     "source-layer": "landuse",
     layout: {
       visibility: "visible",
-      "text-font": ["Noto Sans Italic"],
+      "text-font": ["Iset Sans Italic"],
       "text-field": ["get", "name"],
       "text-size": [
         "interpolate",
@@ -469,7 +469,7 @@ export default [
       "icon-image": "cafe",
       "icon-size": 1,
       "icon-anchor": "bottom",
-      "text-font": ["Noto Sans Regular"],
+      "text-font": ["Iset Sans Regular"],
       "text-size": 11,
       "text-field": ["get", "name"],
       "text-anchor": "top",
@@ -498,7 +498,7 @@ export default [
       "icon-image": "atm",
       "icon-size": 1,
       "icon-anchor": "bottom",
-      "text-font": ["Noto Sans Regular"],
+      "text-font": ["Iset Sans Regular"],
       "text-size": 11,
       "text-field": ["get", "name"],
       "text-anchor": "top",
@@ -531,7 +531,7 @@ export default [
       "icon-image": ["get", "amenity"],
       "icon-size": 1,
       "icon-anchor": "bottom",
-      "text-font": ["Noto Sans Regular"],
+      "text-font": ["Iset Sans Regular"],
       "text-size": 11,
       "text-field": ["get", "name"],
       "text-anchor": "top",
@@ -576,7 +576,7 @@ export default [
       "icon-image": ["get", "amenity"],
       "icon-size": 1,
       "icon-anchor": "bottom",
-      "text-font": ["Noto Sans Regular"],
+      "text-font": ["Iset Sans Regular"],
       "text-size": 11,
       "text-field": ["get", "name"],
       "text-anchor": "top",
@@ -613,7 +613,7 @@ export default [
       "icon-image": ["get", "tourism"],
       "icon-size": 1,
       "icon-anchor": "bottom",
-      "text-font": ["Noto Sans Regular"],
+      "text-font": ["Iset Sans Regular"],
       "text-size": 11,
       "text-field": ["get", "name"],
       "text-anchor": "top",
@@ -732,7 +732,7 @@ export default [
       "icon-image": ["get", "shop"],
       "icon-size": 1,
       "icon-anchor": "bottom",
-      "text-font": ["Noto Sans Regular"],
+      "text-font": ["Iset Sans Regular"],
       "text-size": 11,
       "text-field": ["get", "name"],
       "text-anchor": "top",
@@ -925,7 +925,7 @@ export default [
       "icon-image": "restaurant",
       "icon-size": 1,
       "icon-anchor": "bottom",
-      "text-font": ["Noto Sans Regular"],
+      "text-font": ["Iset Sans Regular"],
       "text-size": 11,
       "text-field": ["get", "name"],
       "text-anchor": "top",
@@ -958,7 +958,7 @@ export default [
       "icon-image": "fast_food",
       "icon-size": 1,
       "icon-anchor": "bottom",
-      "text-font": ["Noto Sans Regular"],
+      "text-font": ["Iset Sans Regular"],
       "text-size": 11,
       "text-field": ["get", "name"],
       "text-anchor": "top",
@@ -991,7 +991,7 @@ export default [
       "icon-image": ["get", "amenity"],
       "icon-size": 1,
       "icon-anchor": "bottom",
-      "text-font": ["Noto Sans Regular"],
+      "text-font": ["Iset Sans Regular"],
       "text-size": 11,
       "text-field": ["get", "name"],
       "text-anchor": "top",
@@ -1024,7 +1024,7 @@ export default [
       "icon-image": "pharmacy",
       "icon-size": 1,
       "icon-anchor": "bottom",
-      "text-font": ["Noto Sans Regular"],
+      "text-font": ["Iset Sans Regular"],
       "text-size": 11,
       "text-field": ["get", "name"],
       "text-anchor": "top",
@@ -1051,7 +1051,7 @@ export default [
     "source-layer": "tourism",
     layout: {
       visibility: "visible",
-      "text-font": ["Noto Sans Bold"],
+      "text-font": ["Iset Sans Bold"],
       "text-field": ["get", "name"],
       "text-size": [
         "interpolate",
@@ -1087,7 +1087,7 @@ export default [
       "icon-size": 1,
       "icon-anchor": "bottom",
       "icon-allow-overlap": true,
-      "text-font": ["Noto Sans Regular"],
+      "text-font": ["Iset Sans Regular"],
       "text-field": ["get", "name"],
       "text-size": 11,
       "text-max-width": 4,
@@ -1115,7 +1115,7 @@ export default [
     "source-layer": "landuse",
     layout: {
       visibility: "visible",
-      "text-font": ["Noto Sans Italic"],
+      "text-font": ["Iset Sans Italic"],
       "text-field": ["get", "name"],
       "text-size": [
         "interpolate",
@@ -1142,7 +1142,7 @@ export default [
     "source-layer": "landuse",
     layout: {
       visibility: "visible",
-      "text-font": ["Noto Sans Italic"],
+      "text-font": ["Iset Sans Italic"],
       "text-field": ["get", "name"],
       "text-size": [
         "interpolate",
@@ -1173,7 +1173,7 @@ export default [
     "source-layer": "leisure",
     layout: {
       visibility: "visible",
-      "text-font": ["Noto Sans Italic"],
+      "text-font": ["Iset Sans Italic"],
       "text-field": ["get", "name"],
       "text-size": [
         "interpolate",
@@ -1200,7 +1200,7 @@ export default [
     "source-layer": "leisure",
     layout: {
       visibility: "visible",
-      "text-font": ["Noto Sans Italic"],
+      "text-font": ["Iset Sans Italic"],
       "text-field": ["get", "name"],
       "text-size": [
         "interpolate",
@@ -1234,7 +1234,7 @@ export default [
       "icon-image": ["get", "amenity"],
       "icon-size": 1,
       "icon-anchor": "bottom",
-      "text-font": ["Noto Sans Regular"],
+      "text-font": ["Iset Sans Regular"],
       "text-field": ["step", ["zoom"], "", 14, "", 15, ["get", "name"]],
       "text-size": 11,
       "text-max-width": 4,
@@ -1258,7 +1258,7 @@ export default [
     "source-layer": "points",
     layout: {
       visibility: "visible",
-      "text-font": ["Noto Sans Italic"],
+      "text-font": ["Iset Sans Italic"],
       "text-field": ["get", "ref"],
       "text-size": [
         "interpolate",
@@ -1287,7 +1287,7 @@ export default [
     "source-layer": "points",
     layout: {
       visibility: "visible",
-      "text-font": ["Noto Sans Italic"],
+      "text-font": ["Iset Sans Italic"],
       "text-field": ["format", ["get", "name"], "\n", ["get", "ref"]],
       "text-size": [
         "interpolate",

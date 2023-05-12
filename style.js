@@ -30,7 +30,9 @@ import leisure_background from "./layers/leisure/background.js";
 import leisure_overlay from "./layers/leisure/overlay.js";
 import railway_tunnel from "./layers/railway/tunnel.js";
 import railway_line from "./layers/railway/line.js";
-import highway_line from "./layers/highway/highway_line.js";
+import highway_line, {
+  highway_line_paint,
+} from "./layers/highway/highway_line.js";
 import highway_outline from "./layers/highway/highway_outline.js";
 import highway_dash from "./layers/highway/highway_dash.js";
 import highway_tunnel_line from "./layers/highway/tunnel_line.js";
@@ -65,7 +67,7 @@ export default {
   },
   sprite: `https://tiles.baremaps.com/sprites/osm/sprite`,
   // glyphs: "https://tiles.baremaps.com/fonts/{fontstack}/{range}.pbf",
-  glyphs: "/fonts/{fontstack}/{range}.pbf",
+  glyphs: `/fonts/{fontstack}/{range}.pbf`,
   layers: [
     {
       ...background,
@@ -141,37 +143,60 @@ export default {
     // waterway_tunnel_casing,
     // waterway_tunnel_line,
     // man_made_bridge,
-    // amenity_fountain,
+    {
+      ...amenity_fountain,
+      paint: { "fill-color": "#083245" },
+    },
     // highway_tunnel_outline,
     // highway_tunnel_line,
     // railway_tunnel,
     {
       ...building_shape,
+      type: "fill-extrusion",
       paint: {
-        "fill-color": "#0c1021",
-        "fill-antialias": true,
-        // "fill-outline-color": "rgb(199, 185, 174)",
+        // "fill-color": "#0c1021",
+        // "fill-antialias": true,
+        "fill-extrusion-color": "#0c1021",
+        "fill-extrusion-height": ["get", "building:height"],
+        "fill-extrusion-base": 0,
+        "fill-extrusion-opacity": {
+          stops: [
+            [10, 0],
+            [15, 1],
+          ],
+        },
       },
     },
     {
       ...building_number,
       paint: {
-        "text-color": "rgb(96,96,96)",
+        "text-color": "rgba(255, 255, 255, 0.1)",
         "text-halo-color": "rgba(0,0,0,0.8)",
-        "text-halo-width": 1,
+        "text-halo-width": 0,
+        "text-opacity": {
+          stops: [
+            [10, 0],
+            [15, 1],
+          ],
+        },
       },
     },
-    {
-      ...highway_outline,
-      paint: { ...highway_outline.paint, "line-color": "#171930" },
-    },
+    // {
+    //   ...highway_outline,
+    //   paint: { ...highway_outline.paint, "line-color": "#171930" },
+    // },
     {
       ...highway_line,
-      paint: { ...highway_line.paint, "line-color": "#171930" },
+      paint: highway_line_paint,
     },
     {
       ...highway_dash,
-      paint: { ...highway_dash.paint, "line-color": "#000" },
+      paint: {
+        ...highway_dash.paint,
+        "line-color": "#000",
+        "line-dasharray": [2, 2],
+        "line-opacity": 0.5,
+      },
     },
     // {
     //   ...highway_pedestrian_area,
@@ -191,6 +216,7 @@ export default {
     },
     {
       ...highway_bridge_line,
+      minzoom: 0,
       paint: { ...highway_bridge_line.paint, "line-color": "#171930" },
     },
     {
@@ -199,10 +225,17 @@ export default {
       //   ...highway_label.layout,
       //   "text-field": ["upcase", ["get", "name"]],
       // },
+      layout: {
+        ...highway_label.layout,
+        "text-transform": "uppercase",
+        "text-letter-spacing": 0.1,
+        "icon-size": 1,
+      },
       paint: {
-        "text-color": "rgb(96, 96, 96)",
+        "text-color": "rgba(255, 255, 255, .3)",
         "text-halo-color": "rgba(0, 0, 0, 0.8)",
         "text-halo-width": 1,
+        "text-opacity": 1,
       },
     },
     // aeroway_line,
@@ -216,45 +249,47 @@ export default {
     // natural_trunk,
     {
       ...waterway_label,
-      // layout: {
-      //   ...highway_label.layout,
-      //   "text-field": ["upcase", ["get", "name"]],
-      // },
+      layout: {
+        ...waterway_label.layout,
+        "symbol-placement": "line",
+        "text-letter-spacing": 0.2,
+        "text-transform": "uppercase",
+      },
       paint: {
-        "text-color": "rgba(96, 96, 96, 0.8)",
+        "text-color": "rgba(10, 120, 160, 1)",
         "text-halo-color": "rgba(0, 0, 0, 0)",
         "text-halo-width": 1,
       },
     },
-    {
-      ...icon,
-      paint: {
-        "icon-translate-anchor": "map",
-        "icon-halo-color": "rgba(255, 255, 255, 0.8)",
-        "icon-color": "rgb(0, 146, 219)",
-        "text-color": "rgb(0, 146, 219)",
-      },
-      layout: {
-        ...icon.layout,
-        "text-font": ["Iset Sans Regular"],
-      },
-    },
-    {
-      ...label,
-      // layout: {
-      //   ...label.layout,
-      //   "text-field": ["upcase", ["get", "name"]],
-      // },
-      layout: {
-        ...label.layout,
-        "text-font": ["Iset Sans Regular"],
-      },
-      paint: {
-        ...label.paint,
-        "text-color": "rgba(255, 255, 255, 0.8)",
-        "text-halo-color": "rgba(0, 0, 0, 0.8)",
-        "text-halo-width": 1,
-      },
-    },
+    // {
+    //   ...icon,
+    //   paint: {
+    //     "icon-translate-anchor": "map",
+    //     "icon-halo-color": "rgba(255, 255, 255, 0.8)",
+    //     "icon-color": "rgb(0, 146, 219)",
+    //     "text-color": "rgb(0, 146, 219)",
+    //   },
+    //   layout: {
+    //     ...icon.layout,
+    //     "text-font": ["Iset Sans Regular"],
+    //   },
+    // },
+    // {
+    //   ...label,
+    //   // layout: {
+    //   //   ...label.layout,
+    //   //   "text-field": ["upcase", ["get", "name"]],
+    //   // },
+    //   layout: {
+    //     ...label.layout,
+    //     "text-font": ["Iset Sans Regular"],
+    //   },
+    //   paint: {
+    //     ...label.paint,
+    //     "text-color": "rgba(255, 255, 255, 0.8)",
+    //     "text-halo-color": "rgba(0, 0, 0, 0.8)",
+    //     "text-halo-width": 1,
+    //   },
+    // },
   ],
 };

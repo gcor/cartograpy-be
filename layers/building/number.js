@@ -18,7 +18,7 @@ export default {
     "text-allow-overlap": false,
     "text-anchor": "center",
     "text-field": "{addr:housenumber}",
-    "text-font": ["Noto Sans Regular"],
+    "text-font": ["Iset Sans Regular"],
     "text-offset": [0, 0],
     "text-size": [
       "interpolate",

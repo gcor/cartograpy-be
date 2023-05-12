@@ -897,7 +897,7 @@ export default asLayerObject(withSortKeys(directives), {
     visibility: "visible",
     "icon-size": 1,
     "icon-anchor": "bottom",
-    "text-font": ["Noto Sans Regular"],
+    "text-font": ["Iset Sans Regular"],
     "text-size": 11,
     "text-field": ["get", "name"],
     "text-anchor": "top",

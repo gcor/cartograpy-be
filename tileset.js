@@ -35,7 +35,7 @@ export default {
   maxzoom: config.maxZoom,
   bounds: [60.2768, 56.6769, 60.8812, 56.9579],
   tiles: [`${config.host}/tiles/{z}/{x}/{y}.mvt`],
-  attribution: '© <a href="https://www.openstreetmap.org/">OpenStreetMap</a> ',
+  // attribution: '© <a href="https://www.openstreetmap.org/">OpenStreetMap</a> ',
   vector_layers: [
     aerialway,
     aeroway,

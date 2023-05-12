@@ -73,7 +73,7 @@ export default asLayerObject(withSymbolSortKeys(directives), {
   "source-layer": "point",
   layout: {
     visibility: "visible",
-    "text-font": ["Noto Sans Regular"],
+    "text-font": ["Iset Sans Regular"],
     "text-field": ["get", "name"],
   },
   paint: {
