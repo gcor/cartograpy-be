@@ -66,8 +66,7 @@ export default {
     },
   },
   sprite: `https://tiles.baremaps.com/sprites/osm/sprite`,
-  // glyphs: "https://tiles.baremaps.com/fonts/{fontstack}/{range}.pbf",
-  glyphs: `/fonts/{fontstack}/{range}.pbf`,
+  glyphs: "https://cartography-zeta.vercel.app/fonts/{fontstack}/{range}.pbf",
   layers: [
     {
       ...background,

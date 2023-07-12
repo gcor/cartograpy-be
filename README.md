@@ -1,15 +1,5 @@
 # Steps
 
-TODO
-
-TODO
-
-TODO
-
-TODO
-
-1. Run local database
-
 ```bash
 docker run \
   --name baremaps \
@@ -42,9 +32,20 @@ baremaps map export \
   --repository 'tiles/'
 ```
 
-npx serve -s -p 9001
+https://www.dwtkns.com/srtm30m/
 
---log-level DEBUG
+tippecanoe -e output_folder -zg -f ekb_house.json
 
-ogr2ogr -f GeoJSON output.json input.gpkg
-ogr2ogr -f GeoJSON ekb_house_age.geojson ekb_house_age.gpkg
+tippecanoe -e dtp -z16 -Z10 -f dtp.geojson
+https://gis.stackexchange.com/questions/415806/how-to-generate-a-mapbox-vector-tile-correctly
+
+<!--  -->
+
+gdal_translate -of GTiff -co "TILED=YES" N56E060.hgt terrain.tif
+
+gdal_polygonize.py terrain.tif -f "GeoJSON" terrain.json
+
+tippecanoe -o terrain.mbtiles -zg --drop-densest-as-needed terrain.json
+tippecanoe -e terrain_pbf -z16 -Z10 --drop-densest-as-needed terrain.json
+
+gdal_translate -of PNG -ot Byte -scale -co "WORLDFILE=YES" terrain.tif output.png

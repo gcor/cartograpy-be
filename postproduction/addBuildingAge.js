@@ -1,5 +1,4 @@
 const { Client, Pool } = require("pg");
-const ekbHousesGeoJSON = require("./ekb_house.json");
 
 const dbConfig = {
   user: "baremaps",
@@ -9,9 +8,9 @@ const dbConfig = {
   port: 5432,
 };
 
-const pool = new Pool(dbConfig);
-
-async function insertBuildingAge(collection = ekbHousesGeoJSON) {
+async function insertBuildingAge(table) {
+  const collection = require("../data/ekb_house.json");
+  const pool = new Pool(dbConfig);
   const client = await pool.connect();
 
   try {
@@ -23,33 +22,33 @@ async function insertBuildingAge(collection = ekbHousesGeoJSON) {
       const age = feature.properties?.r_year_int;
 
       if (age) {
-        const query = `
-        SELECT id, tags, geom
-        FROM osm_ways
-        WHERE tags ? 'building' AND
-            ST_Intersects(
-                ST_Buffer(geom, 0),
-            ST_Transform(ST_SetSRID(ST_GeomFromGeoJSON('${JSON.stringify(
-              feature.geometry
-            )}'), 4326), 3857)
-            );
-        `;
-
         // const query = `
-        //     UPDATE osm_ways
-        //     SET tags = tags || ('{"building:year": ${age}}')::jsonb
-        //     WHERE tags ? 'building' AND ST_Intersects(
-        //         geom,
-        //         ST_Transform(ST_SetSRID(ST_GeomFromGeoJSON('${JSON.stringify(
-        //           feature.geometry
-        //         )}'), 4326), 3857)
+        // SELECT id, tags, geom
+        // FROM osm_ways
+        // WHERE tags ? 'building' AND
+        //     ST_Intersects(
+        //         ST_Buffer(geom, 0),
+        //     ST_Transform(ST_SetSRID(ST_GeomFromGeoJSON('${JSON.stringify(
+        //       feature.geometry
+        //     )}'), 4326), 3857)
         //     );
-        //   `;
+        // `;
+
+        const query = `
+            UPDATE ${table}
+            SET tags = tags || ('{"building:year": ${age}}')::jsonb
+            WHERE tags ? 'building' AND ST_Intersects(
+                geom,
+                ST_Transform(ST_SetSRID(ST_GeomFromGeoJSON('${JSON.stringify(
+                  feature.geometry
+                )}'), 4326), 3857)
+            );
+          `;
 
         // execute the update query
         try {
           const result = await client.query(query);
-          console.log(i++, result.rows);
+          // console.log(i++, result.rows);
         } catch (e) {
           console.log(e.message);
         }
@@ -72,121 +71,32 @@ async function insertBuildingAge(collection = ekbHousesGeoJSON) {
   }
 }
 
-insertBuildingAge();
-// async function findMatchingBuildings() {
-//   const client = new Client(dbConfig);
-//   await client.connect();
+// insertBuildingAge("osm_ways");
+// insertBuildingAge("osm_relations");
 
-//   const b2 = {
-//     geometry: {
-//       coordinates: [
-//         [
-//           [60.624378, 56.822634],
-//           [60.624474, 56.822317],
-//           [60.625248, 56.822387],
-//           [60.625152, 56.822705],
-//           [60.624378, 56.822634],
-//         ],
-//       ],
-//       type: "Polygon",
-//     },
-//     properties: {},
-//     type: "Feature",
-//   };
+async function removeDuplicates() {
+  const client = new Client(dbConfig);
 
-//   try {
-//     const query = `
-//     SELECT id, tags, geom
-//     FROM osm_ways
-//     WHERE tags ? 'building' AND
-//         ST_Intersects(
-//         geom,
-//         ST_Transform(ST_SetSRID(ST_GeomFromGeoJSON('${JSON.stringify(
-//           b2.geometry
-//         )}'), 4326), 3857)
-//         );
-//     `;
+  await client.connect();
 
-//     // const query = `
-//     // UPDATE osm_ways
-//     // SET tags = tags || ('{"building:age": "${10}"}')::jsonb
-//     // WHERE tags ? 'building' AND ST_Intersects(
-//     //     geom,
-//     //     ST_Transform(ST_SetSRID(ST_GeomFromGeoJSON('${JSON.stringify(
-//     //       b2.geometry
-//     //     )}'), 4326), 3857)
-//     // );
-//     // `;
+  const deleteDuplicatesQuery = `
+  WITH cte AS (
+    SELECT id, geom, tags,
+      ROW_NUMBER() OVER(PARTITION BY geom, tags ORDER BY id) AS rn
+    FROM osm_ways
+  )
+  DELETE FROM osm_ways
+  WHERE id IN (SELECT id FROM cte WHERE rn > 1);
+  `;
 
-//     const osmWaysData = await client.query(query);
-//     const osmWays = osmWaysData.rows;
+  try {
+    const response = await client.query(deleteDuplicatesQuery);
+    console.log("Duplicates deleted successfully", response.rows);
+  } catch (err) {
+    console.error("Error executing query", err.stack);
+  }
 
-//     console.log(osmWays);
-//   } catch (error) {
-//     console.error("Error:", error);
-//   } finally {
-//     await client.end();
-//   }
-// }
+  await client.end();
+}
 
-// findMatchingBuildings();
-
-// const proj4 = require("proj4");
-// const wkx = require("wkx");
-// const turf = require("@turf/turf");
-
-// function convertToGeoJSON(osmWays) {
-//   return osmWays.map((o) => {
-//     const geometry = wkx.Geometry.parse(new Buffer.from(o.geom, "hex"));
-
-//     return {
-//       type: "Feature",
-//       properties: o.tags,
-//       geometry: {
-//         type: "Polygon",
-//         coordinates: [
-//           geometry.exteriorRing?.map((point) => {
-//             console.log(geometry);
-//             const [lon, lat] = proj4("EPSG:3857", "EPSG:4326", [
-//               point.x,
-//               point.y,
-//             ]);
-//             return [lon, lat];
-//           }),
-//         ],
-//       },
-//     };
-//   });
-// }
-
-// async function findMatchingBuildings() {
-//   const client = new Client(dbConfig);
-//   await client.connect();
-
-//   try {
-//     const query = "SELECT id, tags, geom FROM osm_ways WHERE tags ? 'building'";
-//     const osmWaysData = await client.query(query);
-//     const osmWays = osmWaysData.rows;
-
-//     const ageHousesData = geojson.features.filter(
-//       (feature) => feature.properties?.r_year_int > 0
-//     );
-
-//     const osmHousesData = convertToGeoJSON(osmWays);
-
-//     osmHousesData.map((osmHouse) => {
-//       const ageHouse = ageHousesData.find((house) =>
-//         turf.booleanOverlap(osmHouse.geometry, house.geometry)
-//       );
-//       if (ageHouse) {
-//         console.log(osmHouse.geometry, ageHouse.geometry);
-//       }
-//     });
-//   } catch (error) {
-//     console.error("Error:", error);
-//   } finally {
-//     await client.end();
-//   }
-// }
-
-// findMatchingBuildings();
+// removeDuplicates();
