@@ -149,37 +149,6 @@ export default {
     // highway_tunnel_outline,
     // highway_tunnel_line,
     // railway_tunnel,
-    {
-      ...building_shape,
-      type: "fill-extrusion",
-      paint: {
-        // "fill-color": "#0c1021",
-        // "fill-antialias": true,
-        "fill-extrusion-color": "#0c1021",
-        "fill-extrusion-height": ["get", "building:height"],
-        "fill-extrusion-base": 0,
-        "fill-extrusion-opacity": {
-          stops: [
-            [10, 0],
-            [15, 1],
-          ],
-        },
-      },
-    },
-    {
-      ...building_number,
-      paint: {
-        "text-color": "rgba(255, 255, 255, 0.1)",
-        "text-halo-color": "rgba(0,0,0,0.8)",
-        "text-halo-width": 0,
-        "text-opacity": {
-          stops: [
-            [10, 0],
-            [15, 1],
-          ],
-        },
-      },
-    },
     // {
     //   ...highway_outline,
     //   paint: { ...highway_outline.paint, "line-color": "#171930" },
@@ -290,5 +259,36 @@ export default {
     //     "text-halo-width": 1,
     //   },
     // },
+    {
+      ...building_shape,
+      type: "fill-extrusion",
+      paint: {
+        // "fill-color": "#0c1021",
+        // "fill-antialias": true,
+        "fill-extrusion-color": "#0c1021",
+        "fill-extrusion-height": ["get", "building:height"],
+        "fill-extrusion-base": 0,
+        "fill-extrusion-opacity": {
+          stops: [
+            [10, 0],
+            [15, 1],
+          ],
+        },
+      },
+    },
+    {
+      ...building_number,
+      paint: {
+        "text-color": "rgba(255, 255, 255, 0.1)",
+        "text-halo-color": "rgba(0,0,0,0.8)",
+        "text-halo-width": 0,
+        "text-opacity": {
+          stops: [
+            [10, 0],
+            [15, 1],
+          ],
+        },
+      },
+    },
   ],
 };
